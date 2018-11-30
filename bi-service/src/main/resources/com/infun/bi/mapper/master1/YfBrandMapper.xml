@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.infun.bi.mybatis.mapper.master1.YfBrandMapper" >
+  <resultMap id="BaseResultMap" type="com.infun.bi.mybatis.domain.YfBrand" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="brand_name_en" property="brandNameEn" jdbcType="VARCHAR" />
+    <result column="brand_name_acronym" property="brandNameAcronym" jdbcType="VARCHAR" />
+    <result column="international_brand_type" property="internationalBrandType" jdbcType="VARCHAR" />
+    <result column="brand_logo" property="brandLogo" jdbcType="VARCHAR" />
+    <result column="brand_desc" property="brandDesc" jdbcType="VARCHAR" />
+    <result column="site_url" property="siteUrl" jdbcType="VARCHAR" />
+    <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, category_id, brand_name, brand_name_en, brand_name_acronym, international_brand_type, 
+    brand_logo, brand_desc, site_url, sort_order, status, create_time, update_time, version, 
+    is_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.infun.bi.mybatis.domain.YfBrandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from yf_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from yf_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from yf_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.infun.bi.mybatis.domain.YfBrandExample" >
+    delete from yf_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.infun.bi.mybatis.domain.YfBrand" >
+    insert into yf_brand (id, category_id, brand_name, 
+      brand_name_en, brand_name_acronym, international_brand_type, 
+      brand_logo, brand_desc, site_url, 
+      sort_order, status, create_time, 
+      update_time, version, is_delete
+      )
+    values (#{id,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{brandNameEn,jdbcType=VARCHAR}, #{brandNameAcronym,jdbcType=VARCHAR}, #{internationalBrandType,jdbcType=VARCHAR}, 
+      #{brandLogo,jdbcType=VARCHAR}, #{brandDesc,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, 
+      #{sortOrder,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.infun.bi.mybatis.domain.YfBrand" >
+    insert into yf_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="brandNameEn != null" >
+        brand_name_en,
+      </if>
+      <if test="brandNameAcronym != null" >
+        brand_name_acronym,
+      </if>
+      <if test="internationalBrandType != null" >
+        international_brand_type,
+      </if>
+      <if test="brandLogo != null" >
+        brand_logo,
+      </if>
+      <if test="brandDesc != null" >
+        brand_desc,
+      </if>
+      <if test="siteUrl != null" >
+        site_url,
+      </if>
+      <if test="sortOrder != null" >
+        sort_order,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandNameEn != null" >
+        #{brandNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="brandNameAcronym != null" >
+        #{brandNameAcronym,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalBrandType != null" >
+        #{internationalBrandType,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLogo != null" >
+        #{brandLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandDesc != null" >
+        #{brandDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null" >
+        #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null" >
+        #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.infun.bi.mybatis.domain.YfBrandExample" resultType="java.lang.Integer" >
+    select count(*) from yf_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update yf_brand
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null" >
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandNameEn != null" >
+        brand_name_en = #{record.brandNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandNameAcronym != null" >
+        brand_name_acronym = #{record.brandNameAcronym,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internationalBrandType != null" >
+        international_brand_type = #{record.internationalBrandType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandLogo != null" >
+        brand_logo = #{record.brandLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandDesc != null" >
+        brand_desc = #{record.brandDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteUrl != null" >
+        site_url = #{record.siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortOrder != null" >
+        sort_order = #{record.sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update yf_brand
+    set id = #{record.id,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      brand_name_en = #{record.brandNameEn,jdbcType=VARCHAR},
+      brand_name_acronym = #{record.brandNameAcronym,jdbcType=VARCHAR},
+      international_brand_type = #{record.internationalBrandType,jdbcType=VARCHAR},
+      brand_logo = #{record.brandLogo,jdbcType=VARCHAR},
+      brand_desc = #{record.brandDesc,jdbcType=VARCHAR},
+      site_url = #{record.siteUrl,jdbcType=VARCHAR},
+      sort_order = #{record.sortOrder,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      version = #{record.version,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.infun.bi.mybatis.domain.YfBrand" >
+    update yf_brand
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandNameEn != null" >
+        brand_name_en = #{brandNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="brandNameAcronym != null" >
+        brand_name_acronym = #{brandNameAcronym,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalBrandType != null" >
+        international_brand_type = #{internationalBrandType,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLogo != null" >
+        brand_logo = #{brandLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandDesc != null" >
+        brand_desc = #{brandDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null" >
+        site_url = #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null" >
+        sort_order = #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.infun.bi.mybatis.domain.YfBrand" >
+    update yf_brand
+    set category_id = #{categoryId,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      brand_name_en = #{brandNameEn,jdbcType=VARCHAR},
+      brand_name_acronym = #{brandNameAcronym,jdbcType=VARCHAR},
+      international_brand_type = #{internationalBrandType,jdbcType=VARCHAR},
+      brand_logo = #{brandLogo,jdbcType=VARCHAR},
+      brand_desc = #{brandDesc,jdbcType=VARCHAR},
+      site_url = #{siteUrl,jdbcType=VARCHAR},
+      sort_order = #{sortOrder,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
